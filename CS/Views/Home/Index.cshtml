@@ -1,0 +1,12 @@
+﻿@model CS.Model.MyViewModel
+
+@using(Html.BeginForm(new { Controller = "Home", Action = "ExportTo" })) {
+
+    @Html.Partial("GridViewPartialProducts", Model.Products)
+    <br />
+    @Html.DevExpress().Button(settings => {
+        settings.Name = "btnExport";
+        settings.Text = "Export To XLSX";
+        settings.UseSubmitBehavior = true;
+     }).GetHtml()
+}

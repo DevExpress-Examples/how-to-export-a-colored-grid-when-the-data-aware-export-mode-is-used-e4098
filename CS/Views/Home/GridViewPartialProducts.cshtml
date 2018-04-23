@@ -1,0 +1,20 @@
+﻿@Html.DevExpress().GridView(settings => {
+    settings.Name = "gvProducts";
+    settings.CallbackRouteValues = new { Controller = "Home", Action = "GridViewPartialProducts" };
+
+    settings.KeyFieldName = "ProductID";
+
+    settings.Columns.Add("ProductID");
+    settings.Columns.Add("ProductName");
+    settings.Columns.Add("UnitPrice");
+
+    settings.HtmlDataCellPrepared = (sender, e) => {
+        if (e.DataColumn.FieldName == "UnitPrice") {
+            if (Convert.ToInt32(e.CellValue) > 15)
+                e.Cell.BackColor = System.Drawing.Color.Yellow;
+            else
+                e.Cell.BackColor = System.Drawing.Color.Green;
+        }
+    };
+    
+}).Bind(Model).GetHtml()
